@@ -10,3 +10,5 @@ distinct_compositions.Rproj
 *.bbl
 *.blg
 build/
+.DS_Store
+**/.DS_Store
