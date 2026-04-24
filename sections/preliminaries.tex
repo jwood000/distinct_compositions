@@ -1,2 +1,59 @@
 \section{Preliminaries}
 
+Let $\mathbb{N}$ be the set of positive integers $\{1, 2, \dots\}$ and $n \in \mathbb{N}$.
+
+\subsection{Definitions}
+
+\begin{definition}
+    An integer composition (or just composition) $\gamma$ of $n$ is an ordered sequence $(\gamma_1, \gamma_2, \dots, \gamma_k)$ of positive integers whose sum is $n$.
+\end{definition}
+
+\begin{definition}
+    A part, $\gamma_i$, is an individual term of a composition.
+\end{definition}
+
+\begin{definition}
+    A weak composition is a composition where parts are allowed to be zero.
+\end{definition}
+
+\begin{definition}
+    The length of a composition is the number of parts.
+\end{definition}
+
+\begin{definition}
+    A $k$-composition is a composition with $k$ parts.
+\end{definition}
+
+\begin{definition}
+    A distinct composition of $n$ is a composition where no part is repeated.
+\end{definition}
+
+\begin{definition}
+    The set of all $k$-compositions of $n$ is given by:
+        \[
+        \mathcal{C}(n, k) =
+            \left\{
+                \gamma = (\gamma_1, \dots, \gamma_k)
+                \mid
+                \gamma_i \in \mathbb{N},\ \sum_{i = 1}^{k} \gamma_i = n
+            \right\}
+    \]
+\end{definition}
+
+\begin{definition}
+    The set of all compositions of $n$ is given by:
+    \[
+        \mathcal{C}(n) = \bigcup_{k = 1}^{n} \mathcal{C}(n, k)
+    \]
+\end{definition}
+
+\begin{definition}
+    Let $\gamma = (\gamma_1, \dots, \gamma_k)$ and $\gamma^{\prime} = (\gamma^{\prime}_1, \dots, \gamma^{\prime}_k)$ be two different $k$-compositions of $n$ and let $i$ be the first index where they differ.
+    \[
+        \gamma > \gamma^{\prime} \iff \gamma_i > \gamma^{\prime}_i.
+    \]
+\end{definition}
+
+\begin{definition}
+    A sequence of $k$-compositions of $n$, $(\gamma^1, \gamma^2, \dots)$, is in lexicographic order if $\gamma^{i + 1} > \gamma^i$ for all $i$.
+\end{definition}
