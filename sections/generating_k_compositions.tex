@@ -1,0 +1,17 @@
+\section{Generating $k$-Compositions of $n$ in Lexicographic Order}
+
+Let us consider a non-maximal $k$-composition of $n$, $\gamma = (\gamma_1, \dots, \gamma_k)$. A composition $\gamma^{\prime}$ that is greater than $\gamma$ satisfies the property $\gamma^{\prime}_i > \gamma_i$ for the first index from the left $i$ where $\gamma$ and $\gamma^{\prime}$ differ. In order to minimize the increase from $\gamma$, we must find a $\gamma^{\prime}$ where $i$ is maximized. Furthermore, once we have maximized $i$, we need to minimize the part $\gamma^{\prime}_i$ subject to $\gamma^{\prime}_i > \gamma_i$. This is the foundation for generating the next lexicographic composition. It should be noted that the only information needed to generate such a composition is present within $\gamma$ itself.
+
+Given $\gamma$, we wish to construct the next lexicographic composition $\gamma^{\prime}$. Whatever transformation we apply must preserve both the sum $n$ and the length $k$. We also know that we need to maximize the index $i$ where our next composition $\gamma^{\prime}$ differs from $\gamma$ and $\gamma^{\prime}_i > \gamma_i$. This implies we must focus our attention on the far right. In order to preserve the sum $n$, the index $i$ at which we increment must be accompanied by a decrement of the same magnitude at an index $j > i$.
+
+Our first candidate index for incrementing is $k - 1$. Since we must decrement at an index greater than $k - 1$, we know that $\gamma_k$ must be decremented. Before applying these transformations, we must first check whether $\gamma_k > 1$. If $\gamma_k = 1$, decrementing would force $\gamma_k = 0$. Since we are not producing weak compositions, we would be violating the definition of only allowing parts to be members of $\mathbb{N}$. Therefore, if $\gamma_k = 1$, we know that $k - 1$ is an invalid index to increment.
+
+Our next candidate index is $k - 2$. We only need to check if $\gamma_{k - 1} > 1$ as we have already determined $\gamma_{k} = 1$. If $\gamma_{k - 1} = 1$, we continue moving to the left by one. At each index $i$, we have already determined that the parts $(\gamma_{i + 2}, \dots, \gamma_k)$ are all equal to one in the previous iterations, so we only need to check $\gamma_{i + 1}$ to determine if we have reached a point where we can increment. Once we reach an index $i$ where $\gamma_{i + 1} > 1$, there are two cases we need to handle. The first case is when $i = k - 1$, which only requires that we increment $\gamma_{k - 1}$ and decrement $\gamma_k$. In the second case when $i < k - 1$, we increment $\gamma_i$, decrement $\gamma_{i + 1}$, and finally swap $\gamma_{i + 1}$ with $\gamma_k$. The last step is to ensure we produce the smallest lexicographic result. We know that after the decrement, $\gamma_{i + 1}$ is at least one and together with the fact that the remaining parts are all one, the swap guarantees that the possibly largest element is at the far right position.
+
+\[
+    \begin{aligned}
+        \text{Before swap:} \quad & (\gamma_{i + 1} - 1, \dots, \gamma_k) = (\gamma_{i + 1} - 1, 1, \dots, 1) \\
+        \text{After swap:} \quad & (1, \dots, 1, \gamma_{i + 1} - 1)
+    \end{aligned}
+\]
+
