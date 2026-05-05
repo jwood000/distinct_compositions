@@ -1,7 +1,8 @@
 \documentclass{article}
 
 \usepackage{comment}
-\usepackage{amsmath, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
 
 \newcommand{\bigO}{\mathcal{O}}
 \newtheorem{definition}{Definition}
@@ -26,10 +27,9 @@ All of these questions have exhaustive answers with many combinatorial objects s
 
 \input{sections/introduction}
 \input{sections/preliminaries}
+\input{sections/generating_k_compositions}
 
 \begin{comment}
-\input{sections/related_work}
-\input{sections/standard_algorithm}
 \input{sections/distinct_case}
 \input{sections/extensions}
 \input{sections/complexity}
