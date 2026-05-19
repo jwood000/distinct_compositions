@@ -5,6 +5,13 @@
 \usepackage{algpseudocode}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath, amssymb, amsthm}
+\usepackage{cleveref}
+
+\crefname{algorithm}{Algorithm}{Algorithms}
+\crefname{section}{Section}{Sections}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{equation}{Equation}{Equations}
 
 \newcommand{\bigO}{\mathcal{O}}
 \newtheorem{definition}{Definition}
@@ -35,9 +42,9 @@ All of these questions have exhaustive answers with many combinatorial objects s
 \input{sections/introduction}
 \input{sections/preliminaries}
 \input{sections/generating_k_compositions}
+\input{sections/distinct_case}
 
 \begin{comment}
-\input{sections/distinct_case}
 \input{sections/extensions}
 \input{sections/complexity}
 \input{sections/implementation}
