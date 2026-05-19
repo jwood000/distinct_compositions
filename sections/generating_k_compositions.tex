@@ -15,3 +15,32 @@ Our next candidate index is $k - 2$. We only need to check if $\gamma_{k - 1} > 
     \end{aligned}
 \]
 
+\begin{algorithm}
+    \caption{Next Lexicographic $k$-Composition of $n$}
+
+    \begin{algorithmic}[1] % [1] adds line numbers
+        \Procedure{NextComposition}{$\gamma$}
+
+            \Input a non-maximal $k$-composition $\gamma = (\gamma_1, \dots, \gamma_k)$ of $n$, where $k \geq 2$
+            \Postcondition $\gamma$ is replaced by its next lexicographic successor
+
+            \If{$\gamma_k > 1$}
+                \State $\gamma_{k - 1} \gets \gamma_{k - 1} + 1$
+                \State $\gamma_k \gets \gamma_k - 1$
+            \Else
+                \State $i \gets k - 2$
+
+                \While{$i \geq 1 \land \gamma_{i + 1} = 1$}
+                    \State $i \gets i - 1$
+                \EndWhile
+
+                \State $\gamma_i \gets \gamma_i + 1$
+                \State $\gamma_{i + 1} \gets \gamma_{i + 1} - 1$
+                \State $(\gamma_{i + 1}, \gamma_k) \gets (\gamma_k, \gamma_{i + 1})$
+            \EndIf
+
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+We will see in the next section that there are many challenges presented with the added restriction of distinctness. The key principles presented here provide the foundations for generating distinct compositions. There is an initial check for a common case. If this fails, we dive into a right to left scan where we try and find an index where the part isn't maximal. Finally, we apply a transformation to the tail that minimizes the difference from the current composition.
