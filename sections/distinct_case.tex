@@ -1,0 +1,9 @@
+\section{Generating Distinct $k$-Compositions of $n$ in Lexicographic Order}
+\label{sec:distinct_case}
+
+We just saw in the unrestricted case in \cref{sec:generating_k_compositions} that the information embedded directly in the current composition along with a few basic principles allowed us to derive an efficient algorithm, \cref{alg:next-k-composition}, for generating the next lexicographic composition. We know that our transformation must preserve the sum and the length while producing a composition that is minimally greater than the current composition. That is, there will be no other composition between the current composition and the produced next composition. With the restriction of distinctness, we will see that the information needed to generate the next distinct composition cannot easily be derived using the same methodology as we did in the unrestricted methodology.
+
+\subsection{Why the Unrestricted Method Fails}
+
+To see why the unrestricted method fails, a natural place to inspect is the point where incrementing and decrementing occur. Recall at this step in the algorithm, we have determined the correct indices to transform for the next lexicographic composition. Since duplicates were allowed, these transformations did not need additional checks for producing duplicate parts. Additionally, since incrementing or decrementing had no effect on length, we just needed to guarantee that the sum was preserved; that is, the magnitude of the increment matched the magnitude of the decrement. In the distinct case, simply incrementing or decrementing may produce a part that already exists in the composition, thus yielding a composition that does not have distinct parts.
+
