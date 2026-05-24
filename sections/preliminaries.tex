@@ -29,7 +29,7 @@ Let $\mathbb{N}$ be the set of positive integers $\{1, 2, \dots\}$ and $n \in \m
 
 \begin{definition}
     The set of all $k$-compositions of $n$ is given by:
-        \[
+    \[
         \mathcal{C}(n, k) =
             \left\{
                 \gamma = (\gamma_1, \dots, \gamma_k)
@@ -40,9 +40,30 @@ Let $\mathbb{N}$ be the set of positive integers $\{1, 2, \dots\}$ and $n \in \m
 \end{definition}
 
 \begin{definition}
+    The set of all distinct $k$-compositions of $n$ is given by:
+    \[
+        \mathcal{D}(n, k) =
+            \left\{
+                \gamma = (\gamma_1, \dots, \gamma_k)
+                \mid
+                \gamma_i \in \mathbb{N},
+                \gamma_i \neq \gamma_j \text{ for } 1 \leq i < j \leq k,
+                \quad \sum_{i = 1}^{k} \gamma_i = n
+            \right\}
+    \]
+\end{definition}
+
+\begin{definition}
     The set of all compositions of $n$ is given by:
     \[
         \mathcal{C}(n) = \bigcup_{k = 1}^{n} \mathcal{C}(n, k)
+    \]
+\end{definition}
+
+\begin{definition}
+    The set of all distinct compositions of $n$ is given by:
+    \[
+        \mathcal{D}(n) = \bigcup_{k = 1}^{n} \mathcal{D}(n, k)
     \]
 \end{definition}
 
