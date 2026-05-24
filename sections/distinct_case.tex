@@ -5,6 +5,75 @@ We just saw in the unrestricted case in \cref{sec:generating_k_compositions} tha
 
 \subsection{Why the Unrestricted Method Fails}
 
-To see why the unrestricted method fails, a natural place to inspect is the point where incrementing and decrementing occur. Recall at this step in the algorithm, we have determined the correct indices to transform for the next lexicographic composition. Since duplicates were allowed, these transformations did not need additional checks for producing duplicate parts. Additionally, since incrementing or decrementing had no effect on length, we just needed to guarantee that the sum was preserved; that is, the magnitude of the increment matched the magnitude of the decrement. In the distinct case, simply incrementing or decrementing may produce a part that already exists in the composition, thus yielding a composition that does not have distinct parts.
+To see why the unrestricted method fails, a natural place to inspect is the point where incrementing and decrementing occur. Recall at this step in the algorithm, we have determined the correct indices to transform for the next lexicographic composition. Since duplicates were allowed, these transformations did not need additional checks for producing duplicate parts. Additionally, since incrementing or decrementing had no effect on length, we just needed to guarantee that the sum was preserved; that is, the magnitude of the increment matched the magnitude of the decrement. In the distinct case, simply incrementing or decrementing may produce a part that already exists in the composition, thus yielding a composition that does not have distinct parts (see \cref{ex:distinct-increment-failure}).
 
-Furthermore, finding the correct index where the transformation begins in the distinct case is more complex. In the unrestricted case there were two scenarios, both of which relied on comparing a part against the minimum value 1. In the first scenario, we simply checked if the last part was greater than 1. If it was, we knew exactly which parts to transform. If that failed, we branched into the second scenario which sought to find the first index from the right that could be incremented. This required successive checks against 1. In the distinct case, we cannot apply this same methodology as the minimum feasible value of a particular part is not a constant value. It depends on what values exist to the left as well as what possible sums we can achieve with the remaining distinct parts.
+\begin{example}[Failure of Unrestricted Increment/Decrement]
+\label{ex:distinct-increment-failure}
+
+Let
+\[
+    \gamma = (6, 8, 7, 5, 9, 4, 11),
+\]
+a distinct $7$-composition of $50$.
+
+If we were to apply the unrestricted transformations, we would increment $\gamma_6$ and decrement $\gamma_7$:
+
+\[
+    (6, 8, 7, 5, 9, 4, 11) \longrightarrow (6, 8, 7, 5, 9, 5, 10) \notin \mathcal{D}(50,7).
+\]
+This result is not distinct, since $5$ appears twice.
+
+Since that fails, a natural attempt is to continue incrementing and decrementing:
+
+\[
+    \begin{aligned}
+        (6, 8, 7, 5, 9, 5, 10) &\longrightarrow (6, 8, 7, 5, 9, 6, 9)  &&\notin \mathcal{D}(50,7), \\
+        (6, 8, 7, 5, 9, 6, 9)  &\longrightarrow (6, 8, 7, 5, 9, 7, 8)  &&\notin \mathcal{D}(50,7), \\
+        (6, 8, 7, 5, 9, 7, 8)  &\longrightarrow (6, 8, 7, 5, 9, 8, 7)  &&\notin \mathcal{D}(50,7), \\
+        (6, 8, 7, 5, 9, 8, 7)  &\longrightarrow (6, 8, 7, 5, 9, 9, 6)  &&\notin \mathcal{D}(50,7), \\
+        (6, 8, 7, 5, 9, 9, 6)  &\longrightarrow (6, 8, 7, 5, 9, 10, 5) &&\notin \mathcal{D}(50,7), \\
+        (6, 8, 7, 5, 9, 10, 5) &\longrightarrow (6, 8, 7, 5, 9, 11, 4) &&\in \mathcal{D}(50,7).
+    \end{aligned}
+\]
+
+This method took seven total attempts before producing a valid result. When you include the extra overhead of checking whether your result contains duplicates, the method is computationally expensive.
+
+\end{example}
+
+Furthermore, finding the correct index where the transformation begins in the distinct case is more complex. In the unrestricted case there were two scenarios, both of which relied on comparing a part against the minimum value 1. In the first scenario, we simply checked if the last part was greater than 1. If it was, we knew exactly which parts to transform. If that failed, we branched into the second scenario which sought to find the first index from the right that could be incremented. This required successive checks against 1. In the distinct case, we cannot apply this same methodology as the minimum feasible value of a particular part is not a constant value. It depends on what values exist to the left as well as what possible sums we can achieve with the remaining distinct parts (see \cref{ex:distinct-index-selection-failure}).
+
+\begin{example}[Failure of Unrestricted Index Selection]
+\label{ex:distinct-index-selection-failure}
+
+Let
+\[
+    \gamma = (8, 1, 14, 18, 4, 3, 2),
+\]
+a distinct $7$-composition of $50$.
+
+With this setup where $\gamma_7 > 1$, the unrestricted methodology would place us in the first branch where an increment of $\gamma_6$ and decrement of $\gamma_7$ is called for:
+
+\[
+    (8, 1, 14, 18, 4, 3, 2) \longrightarrow (8, 1, 14, 18, 4, 4, 1) \notin \mathcal{D}(50,7).
+\]
+This result is not distinct, since both $4$ and $1$ appear twice.
+
+Since the first branch produced a result that is not distinct, a reasonable attempt is to try to apply the same logic as the second branch of the unrestricted method. We would immediately pick $i = k - 2$.
+
+\[
+    (8, 1, 14, 18, 4, 3, 2) \longrightarrow (8, 1, 14, 18, 5, 2, 2) \notin \mathcal{D}(50,7).
+\]
+This result is not distinct, since $2$ is duplicated.
+
+In fact, given that the actual next result is $\gamma^{\prime} = (8, 1, 15, 2, 3, 4, 17)$, we see that the index of the part that is incremented is $i = k - 4$. This is much farther to the left than either branch suggests.
+
+\end{example}
+
+\subsection{Determining the Comparison Value}
+
+\begin{comment}
+    4.3 Identifying a movable index
+    4.4 Constructing the minimal feasible suffix
+    4.5 The successor algorithm
+    4.6 Correctness and complexity
+\end{comment}
